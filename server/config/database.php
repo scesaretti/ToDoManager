@@ -1,7 +1,7 @@
 <?php
 class Database 
 {
-    private dbFile="../ToDoManager.db";
+    private dbFile="../../ToDoManager.db";
     public $conn;
     public function getConnection(){
   
