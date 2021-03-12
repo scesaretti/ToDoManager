@@ -10,19 +10,18 @@ $db = $database->getConnection();
 $task = new Task($db);
 // query task
 $stmt = $task->read();
-
 if ($row= $stmt->fetch(PDO::FETCH_ASSOC))
 {
     $tasksArray=array();
 
     $tasksArray["records"]=array();
-    $taskItem[]=$row;
+    $taskItem=$row;
     array_push($tasksArray["records"], $taskItem);
 
     while($row = $stmt->fetch(PDO::FETCH_ASSOC))
     {
   
-        $taskItem[]=$row;
+        $taskItem=$row;
         array_push($tasksArray["records"], $taskItem);
 
 

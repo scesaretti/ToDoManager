@@ -19,10 +19,10 @@ $data = json_decode(file_get_contents("php://input"));
   
 $task->id = $data->id;
   
-$task->taskDescr = $data->taskDescr;
-$task->taskDate = $data->taskDate;
-$task->taskPriority = $data->taskPriority;
-$task->taskState = $data->taskState;
+//$task->taskDescr = $data->taskDescr;
+//$task->taskDate = $data->taskDate;
+//$task->taskPriority = $data->taskPriority;
+//$task->taskState = $data->taskState;
   
 if($task->update()){
   

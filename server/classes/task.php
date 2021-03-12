@@ -24,19 +24,17 @@ class Task
 
     function create()
     {
-        $query = "INSERT INTO
-                " . $this->tableName . "
-            SET
-                taskdescr=:taskdescr, taskdate=:taskdate, taskpriority=:taskpriority, taskstate=:taskstate";
+        $query = "INSERT INTO tasks set ";
+        $query=$query." taskdescr=:taskdescr, taskdate=:taskdate, taskpriority=:taskpriority, taskstate=:taskstate;";
   
         $stmt = $this->conn->prepare($query);
   
         // cleaning fields
         $this->taskDescr=htmlspecialchars(strip_tags($this->taskDescr));
-        $this->taskDate=htmlspecialchars(strip_tags($this->taskDate));
+        //$this->taskDate=htmlspecialchars(strip_tags($this->taskDate));
         $this->taskPriority=htmlspecialchars(strip_tags($this->taskPriority));
-        $this->taskState=htmlspecialchars(strip_tags($this->taskState));
-  
+        $this->taskState=1;
+        $this->taskDate=date("d-m-Y");  
         // bind values
         $stmt->bindParam(":taskdescr", $this->taskDescr);
         $stmt->bindParam(":taskdate", $this->taskDate);
@@ -54,30 +52,20 @@ class Task
     function update()
     {
   
-        $query = "UPDATE
-                    " . $this->tableName . "
-                SET
-                    taskdescr = :taskdescr,
-                    taskdate = :taskdate,
-                    taskpriority = :taskpriority,
+        $query = "UPDATE tasks";
+
+        $query=$query."SET
                     taskstate = :taskstate
                 WHERE
-                    idtask = :idTask";
+                    idtask = :idTask;";
   
 
         $stmt = $this->conn->prepare($query);
   
-        // cleaning fields
-        $this->taskDescr=htmlspecialchars(strip_tags($this->taskDescr));
-        $this->taskDate=htmlspecialchars(strip_tags($this->taskDate));
-        $this->taskPriority=htmlspecialchars(strip_tags($this->taskPriority));
-        $this->taskState=htmlspecialchars(strip_tags($this->taskState));
-        $this->idTask=htmlspecialchars(strip_tags($this->idTask));
-  
+        $this->taskId=htmlspecialchars(strip_tags($this->taskId));
+        //set task to 0 for closing
+        $taskState=0;  
         // bind new values
-        $stmt->bindParam(':taskdescr', $this->taskDescr);
-        $stmt->bindParam(':taskDate', $this->taskDate);
-        $stmt->bindParam(':taskpriority', $this->taskPriority);
         $stmt->bindParam(':taskstate', $this->taskState);
         $stmt->bindParam(':id', $this->id);
   
