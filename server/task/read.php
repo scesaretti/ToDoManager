@@ -10,28 +10,30 @@ $db = $database->getConnection();
 $task = new Task($db);
 // query task
 $stmt = $task->read();
-$num = 1;
-// check if more than 0 record found
-if($num !== 0){
-    $tasks_array=array();
-    $tasks_array["records"]=array();
+
+if ($row= $stmt->fetch(PDO::FETCH_ASSOC))
+{
+    $tasksArray=array();
+
+    $tasksArray["records"]=array();
+    $taskItem[]=$row;
+    array_push($tasksArray["records"], $taskItem);
+
+    while($row = $stmt->fetch(PDO::FETCH_ASSOC))
+    {
   
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-        extract($row);
-  
-        $taskItem=array(
-            "id" => $id,
-            "taskdescr" => $taskdescr,
-            "taskdate" => $taskdate,
-        );
-  
-        array_push($tasks_array["records"], $taskItem);
+        $taskItem[]=$row;
+        array_push($tasksArray["records"], $taskItem);
+
+
     }
+  
+
   
     // set response code - 200 OK
     http_response_code(200);
   
-    echo json_encode($tasks_array);
+    echo json_encode($tasksArray);
 }
 else{
   

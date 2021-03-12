@@ -2,8 +2,8 @@
 class Task
 {
     private $conn;
-    private $tableName = "tasks";
-    public $id;
+//    private $tableName = "tasks";
+    public $idTask;
     public $taskDescr;
     public $taskDate;
     public $taskPriority;
@@ -16,7 +16,7 @@ class Task
 
     function read()
     {
-        $query = "SELECT * FROM ".$this->tableName." ORDER BY taskdate DESC;";
+        $query = "SELECT * FROM  tasks ORDER BY taskdate DESC;";
         $stmt = $this->conn->query($query);
   
         return $stmt;
@@ -62,7 +62,7 @@ class Task
                     taskpriority = :taskpriority,
                     taskstate = :taskstate
                 WHERE
-                    id = :id";
+                    idtask = :idTask";
   
 
         $stmt = $this->conn->prepare($query);
@@ -72,7 +72,7 @@ class Task
         $this->taskDate=htmlspecialchars(strip_tags($this->taskDate));
         $this->taskPriority=htmlspecialchars(strip_tags($this->taskPriority));
         $this->taskState=htmlspecialchars(strip_tags($this->taskState));
-        $this->id=htmlspecialchars(strip_tags($this->id));
+        $this->idTask=htmlspecialchars(strip_tags($this->idTask));
   
         // bind new values
         $stmt->bindParam(':taskdescr', $this->taskDescr);
