@@ -1,0 +1,27 @@
+<html lang="it">
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="app.js"> </script>
+<script src="readtask.js"> </script>
+<script src="createtask.js"> </script>
+<script src="closetask.js"> </script>
+</head>
+
+<body onload="showTasks()">
+<table style="width:100%" id="task_table">
+	<tbody>
+	</tbody>
+</table>
+
+<form id='task-form' action="/sauro/ToDoManager/server/task/create.php" method='post'>
+<label for="txttaskDescr">Description: </label>
+<input type='text' name='txttaskDescr'  required />
+<label for="txtPriority">Task Priority (1 to 5):</label>
+<input type='text' name='txttaskPriority' required />
+<button type='submit'>
+Create Task
+</button>
+</form> 
+</body>
+</html>
+
