@@ -2,24 +2,22 @@
 class Task
 {
     private $conn;
-    private $table_name = "tasks";
+    private $tableName = "tasks";
     public $id;
     public $taskDescr;
     public $taskDate;
     public $taskPriority;
     public $taskState;
     
-    public function __construct($db){
+    public function __construct($db)
+    {
         $this->conn = $db;
     }
 
-    function read(){
-        $query = "SELECT * FROM
-                " .$this->table_name ." ORDER BY taskDate DESC";
-
-        $stmt = $this->conn->prepare($query);
-  
-        $stmt->execute();
+    function read()
+    {
+        $query = "SELECT * FROM ".$this->tableName." ORDER BY taskdate DESC;";
+        $stmt = $this->conn->query($query);
   
         return $stmt;
     }
@@ -27,7 +25,7 @@ class Task
     function create()
     {
         $query = "INSERT INTO
-                " . $this->table_name . "
+                " . $this->tableName . "
             SET
                 taskdescr=:taskdescr, taskdate=:taskdate, taskpriority=:taskpriority, taskstate=:taskstate";
   
@@ -57,7 +55,7 @@ class Task
     {
   
         $query = "UPDATE
-                    " . $this->table_name . "
+                    " . $this->tableName . "
                 SET
                     taskdescr = :taskdescr,
                     taskdate = :taskdate,

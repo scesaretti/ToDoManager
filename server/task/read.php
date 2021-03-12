@@ -7,15 +7,12 @@ include_once '../classes/task.php';
   
 $database = new Database();
 $db = $database->getConnection();
-  
 $task = new Task($db);
-
 // query task
 $stmt = $task->read();
-$num = $stmt->rowCount();
+$num = 1;
 // check if more than 0 record found
-if($num>0){
-  
+if($num !== 0){
     $tasks_array=array();
     $tasks_array["records"]=array();
   
@@ -24,8 +21,8 @@ if($num>0){
   
         $taskItem=array(
             "id" => $id,
-            "taskdescr" => $taskDescr,
-            "taskdate" => $taskDate,
+            "taskdescr" => $taskdescr,
+            "taskdate" => $taskdate,
         );
   
         array_push($tasks_array["records"], $taskItem);
