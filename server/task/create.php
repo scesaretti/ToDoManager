@@ -18,24 +18,25 @@ $task = new Task($db);
   
 // get posted data
 $data = json_decode(file_get_contents("php://input"));
+print_r($data);
   
 if(!empty($data->taskDescr) &&
- !empty($data->taskDate) &&
-!empty($data->taskPriority) &&
-!empty($data->taskState)
-){
+ !empty($data->taskPriority))
+{
+print("arriva qui");
+
   
     $task->taskDescr = $data->taskDescr;
-    $task->taskDate = date('d-m-Y');
     $task->taskPriority = $data->taskPriority;
-    $task->taskState = $data->taskState;
-  
+
     if($task->create()){
+
         // set response code - 201 created
         http_response_code(201);
   
         echo json_encode(array("message" => "Task created."));
     }
+}
   
     else{
   
@@ -53,4 +54,6 @@ else{
   
     echo json_encode(array("message" => "Unable to create task. Data is incomplete."));
 }
+
+
 ?>

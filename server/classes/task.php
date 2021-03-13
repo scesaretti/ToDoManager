@@ -2,7 +2,6 @@
 class Task
 {
     private $conn;
-//    private $tableName = "tasks";
     public $idTask;
     public $taskDescr;
     public $taskDate;
@@ -24,23 +23,21 @@ class Task
 
     function create()
     {
-        $query = "INSERT INTO tasks set ";
-        $query=$query." taskdescr=:taskdescr, taskdate=:taskdate, taskpriority=:taskpriority, taskstate=:taskstate;";
-  
+        $query = "INSERT INTO tasks (taskdescr,taskpriority,taskdate,taskstate) VALUES ( ";
+        $query=$query."?,?,?,?)";
+     
         $stmt = $this->conn->prepare($query);
   
         // cleaning fields
         $this->taskDescr=htmlspecialchars(strip_tags($this->taskDescr));
-        //$this->taskDate=htmlspecialchars(strip_tags($this->taskDate));
         $this->taskPriority=htmlspecialchars(strip_tags($this->taskPriority));
         $this->taskState=1;
         $this->taskDate=date("d-m-Y");  
         // bind values
-        $stmt->bindParam(":taskdescr", $this->taskDescr);
-        $stmt->bindParam(":taskdate", $this->taskDate);
-        $stmt->bindParam(":taskpriority", $this->taskPriority);
-        $stmt->bindParam(":taskstate", $this->taskState);
-  
+        $stmt->bindParam(1, $this->taskDescr);
+        $stmt->bindParam(2, $this->taskDate);
+        $stmt->bindParam(3, $this->taskPriority);
+        $stmt->bindParam(4, $this->taskState);
         if($stmt->execute()){
             return true;
         }
@@ -52,24 +49,16 @@ class Task
     function update()
     {
   
-        $query = "UPDATE tasks";
-
-        $query=$query."SET
-                    taskstate = :taskstate
-                WHERE
-                    idtask = :idTask;";
+        $query = "UPDATE tasks SET taskstate =0 WHERE idtask =?";
   
-
         $stmt = $this->conn->prepare($query);
   
-        $this->taskId=htmlspecialchars(strip_tags($this->taskId));
-        //set task to 0 for closing
-        $taskState=0;  
+        $this->idTask=htmlspecialchars(strip_tags($this->idTask));
         // bind new values
-        $stmt->bindParam(':taskstate', $this->taskState);
-        $stmt->bindParam(':id', $this->id);
+        $stmt->bindParam(1, $this->idTask);
   
         if($stmt->execute()){
+
             return true;
         }
   

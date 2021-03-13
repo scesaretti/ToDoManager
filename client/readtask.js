@@ -7,7 +7,8 @@ function showTasks()
     });
 }
 
-function appendToTaskTable(item){
+function appendToTaskTable(item)
+{
     var state="Open";
     if (item.taskstate==1)
     {
@@ -17,11 +18,11 @@ function appendToTaskTable(item){
     {
         state="Closed";
     }                 
-    $( "#task_table" ).append("<tr> <td>" + JSON.stringify(item.taskdescr) + "</td>" +
+    $( "#task_table" ).append("<tr> <td>" + item.taskdescr + "</td>" +
                                    "<td>" + item.taskdate + "</td>" +
                                    "<td>" + item.taskpriority + "</td>" +
-                                   "<td>" + state + "</td>" +
-                                   "<td><button onclick="+closeTask(item.idtask)+">Close Task</button></td>" +
+                                   "<td>" + state + "</td>"+
+                                   "<td><button id=\"btnclosetask\">Close Task</button></td>" +
 
-                              "</tr>" );
+          "</tr>");
 }

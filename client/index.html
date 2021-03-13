@@ -8,6 +8,8 @@
 </head>
 
 <body onload="showTasks()">
+<div id="message">
+</div>
 <table style="width:100%" id="task_table">
 <tr>
 <th>Description</th>
@@ -21,15 +23,14 @@
 	</tbody>
 </table>
 
-<form id='task-form' action="/sauro/ToDoManager/server/task/create.php" method='post'>
-<label for="txttaskDescr">Description: </label>
-<input type='text' name='txttaskDescr'  required />
-<label for="txtPriority">Task Priority (1 to 5):</label>
-<input type='text' name='txttaskPriority' required />
-<button type='submit'>
+<form id='task-form' action='#' method='POST'>
+<label for="lbltaskDescr">Description: </label>
+<input type="text" id="taskDescr"  name="taskDescr"  required />
+<label for="lbltaskPriority">Task Priority (1 to 5):</label>
+<input type="text" id="taskPriority" name="taskPriority" required />
+<button type="submit">
 Create Task
 </button>
 </form> 
 </body>
 </html>
-
