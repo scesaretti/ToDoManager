@@ -1,13 +1,17 @@
 <?php
 class Task
 {
+    // Database connection 
     private $conn;
+    // members of class task
     public $idTask;
     public $taskDescr;
     public $taskDate;
     public $taskPriority;
     public $taskState;
     
+
+    // Methods for class task
     public function __construct($db)
     {
         $this->conn = $db;
@@ -45,7 +49,7 @@ class Task
         return false;
       
     }
-
+    // This method is used to close the active task
     function update()
     {
   

@@ -8,7 +8,8 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
   
 // get database connection
 include_once '../config/database.php';
-  
+
+// Include class task  
 include_once '../classes/task.php';
   
 $database = new Database();
@@ -18,14 +19,12 @@ $task = new Task($db);
   
 // get posted data
 $data = json_decode(file_get_contents("php://input"));
-print_r($data);
   
 if(!empty($data->taskDescr) &&
  !empty($data->taskPriority))
 {
-print("arriva qui");
 
-  
+    // bind values from JSON  
     $task->taskDescr = $data->taskDescr;
     $task->taskPriority = $data->taskPriority;
 

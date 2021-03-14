@@ -6,7 +6,10 @@ header("Access-Control-Allow-Methods: POST,PUT");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
   
+// get database connection
 include_once '../config/database.php';
+
+// Include class task  
 include_once '../classes/task.php';
   
 // get database connection
@@ -16,7 +19,7 @@ $db = $database->getConnection();
 $task = new Task($db);
   
 $data = json_decode(file_get_contents("php://input"));
-  
+// Get id of the selected task to update the state in closed  
 $task->idTask = $data->idTask;
   
 if($task->update()){

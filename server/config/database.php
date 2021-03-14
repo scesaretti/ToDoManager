@@ -1,6 +1,7 @@
 <?php
 class Database
 {
+    // set the database file path here for sqlite 
     private $dbFile="../../ToDoManager.db";
     public $conn;
     public function getConnection()

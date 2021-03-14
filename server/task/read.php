@@ -2,7 +2,11 @@
 // required headers
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
+
+// get database connection
 include_once '../config/database.php';
+
+// Include class task  
 include_once '../classes/task.php';
   
 $database = new Database();
@@ -10,6 +14,8 @@ $db = $database->getConnection();
 $task = new Task($db);
 // query task
 $stmt = $task->read();
+
+// Check if there are records
 if ($row= $stmt->fetch(PDO::FETCH_ASSOC))
 {
     $tasksArray=array();
